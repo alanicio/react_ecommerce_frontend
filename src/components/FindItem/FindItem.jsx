@@ -1,5 +1,6 @@
-import React, { useRef, useState } from "react";
+import { useState } from "react";
 import "./FindItem.css";
+import useGetItems from "../../hooks/services/items/useGetItems";
 
 const FindItem = () => {
   const items = [
@@ -74,6 +75,8 @@ const FindItem = () => {
       price: 63.78,
     },
   ];
+  const { response } = useGetItems();
+  console.log({ response });
   const [displayItemList, setDisplayItemList] = useState(false);
   const onFocusInput = () => {
     setDisplayItemList(true);
