@@ -27,7 +27,7 @@ const SelectedItemsTable = ({ choosedItems, removeItem }) => {
               />
             </td>
             <td>
-              <button onClick={removeItem}>Remove</button>
+              <button onClick={() => removeItem(item)}>Remove</button>
             </td>
           </tr>
         ))}
