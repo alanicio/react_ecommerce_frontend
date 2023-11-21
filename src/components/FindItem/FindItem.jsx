@@ -1,11 +1,13 @@
 import { useState } from "react";
 import "./FindItem.css";
 import useGetItems from "../../hooks/services/items/useGetItems";
+import PropTypes from "prop-types";
 
-const FindItem = () => {
+const FindItem = ({ addItem, choosedItems }) => {
   const [search, setSearch] = useState("");
   const [displayItemList, setDisplayItemList] = useState(false);
   const { items } = useGetItems(search);
+  const choosedIds = choosedItems.map(({ id }) => id);
   const onFocusInput = () => {
     setDisplayItemList(true);
   };
@@ -16,7 +18,7 @@ const FindItem = () => {
     setSearch(event.target.value);
   };
   const onClickItem = (item) => {
-    console.log({ item });
+    addItem(item);
   };
   return (
     <div className="row pb-15">
@@ -36,11 +38,13 @@ const FindItem = () => {
           <div className="autocomplete-wrapper">
             <div className="autocomplete-list">
               <ul>
-                {items.map((item) => (
-                  <li onMouseDown={() => onClickItem(item)} key={item.id}>
-                    {item.name} -- ${item.price}
-                  </li>
-                ))}
+                {items
+                  .filter((item) => !choosedIds.includes(item.id))
+                  .map((item) => (
+                    <li onMouseDown={() => onClickItem(item)} key={item.id}>
+                      {item.name} -- ${item.price}
+                    </li>
+                  ))}
               </ul>
             </div>
           </div>
@@ -48,6 +52,11 @@ const FindItem = () => {
       </div>
     </div>
   );
+};
+
+FindItem.propTypes = {
+  addItem: PropTypes.funct,
+  choosedItems: PropTypes.array,
 };
 
 export default FindItem;

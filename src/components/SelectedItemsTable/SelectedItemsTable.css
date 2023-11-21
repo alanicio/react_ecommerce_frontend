@@ -1,0 +1,13 @@
+.table-container {
+  box-sizing: border-box;
+  max-height: 350px;
+  overflow-y: scroll;
+}
+
+table {
+  width: 100%;
+}
+
+th {
+  text-align: left;
+}
