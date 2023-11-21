@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import "./FindItem.css";
 
 const FindItem = () => {
@@ -74,23 +74,40 @@ const FindItem = () => {
       price: 63.78,
     },
   ];
-  const searchInput = useRef(null);
+  const [displayItemList, setDisplayItemList] = useState(false);
+  const onFocusInput = () => {
+    setDisplayItemList(true);
+  };
+  const onBlurInput = () => {
+    setDisplayItemList(false);
+  };
+  const onClickItem = (item) => {
+    console.log({ item });
+  };
   return (
     <div className="row pb-15">
       <div className="col-100">
         <label htmlFor="item">Find Item:</label>
-        <input type="text" name="item" id="item" ref={searchInput} />
-        <div className="autocomplete-wrapper">
-          <div className="autocomplete-list">
-            <ul>
-              {items.map(({ name, price }) => (
-                <li>
-                  {name} -- ${price}
-                </li>
-              ))}
-            </ul>
+        <input
+          type="text"
+          name="item"
+          id="item"
+          onFocus={onFocusInput}
+          onBlur={onBlurInput}
+        />
+        {displayItemList ? (
+          <div className="autocomplete-wrapper">
+            <div className="autocomplete-list">
+              <ul>
+                {items.map((item) => (
+                  <li onMouseDown={() => onClickItem(item)} key={item.id}>
+                    {item.name} -- ${item.price}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
-        </div>
+        ) : null}
       </div>
     </div>
   );
