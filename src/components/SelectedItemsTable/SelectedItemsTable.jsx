@@ -1,7 +1,15 @@
 import PropTypes from "prop-types";
 import "./SelectedItemsTable.css";
 
-const SelectedItemsTable = ({ choosedItems, removeItem }) => {
+const SelectedItemsTable = ({ choosedItems, removeItem, setQuantity }) => {
+  const onInputNumberChange = (event, item) => {
+    const quantityValue = event.target.value;
+    if (quantityValue > item.stock) {
+      setQuantity(item.id, item.stock);
+    } else {
+      setQuantity(item.id, quantityValue);
+    }
+  };
   return (
     <div className="table-container">
       <h3>Added Items</h3>
@@ -24,6 +32,8 @@ const SelectedItemsTable = ({ choosedItems, removeItem }) => {
                 id="quantity"
                 max={item.stock}
                 min={1}
+                value={item.quantity}
+                onChange={(event) => onInputNumberChange(event, item)}
               />
             </td>
             <td>
@@ -39,6 +49,7 @@ const SelectedItemsTable = ({ choosedItems, removeItem }) => {
 SelectedItemsTable.propTypes = {
   choosedItems: PropTypes.object,
   removeItem: PropTypes.func,
+  setQuantity: PropTypes.func,
 };
 
 export default SelectedItemsTable;
