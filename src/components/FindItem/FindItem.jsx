@@ -80,16 +80,17 @@ const FindItem = () => {
       <div className="col-100">
         <label htmlFor="item">Find Item:</label>
         <input type="text" name="item" id="item" ref={searchInput} />
-        <div className="autocomplete-list">
-          <ul>
-            {items.map(({ name, price }) => (
-              <li>
-                {name} -- ${price}
-              </li>
-            ))}
-          </ul>
+        <div className="autocomplete-wrapper">
+          <div className="autocomplete-list">
+            <ul>
+              {items.map(({ name, price }) => (
+                <li>
+                  {name} -- ${price}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
-        <button className="primary">Add Item</button>
       </div>
     </div>
   );
