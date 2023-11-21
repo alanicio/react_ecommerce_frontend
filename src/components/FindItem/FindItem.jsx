@@ -23,6 +23,7 @@ const FindItem = () => {
       <div className="col-100">
         <label htmlFor="search">Find Item:</label>
         <input
+          autoComplete="off"
           type="text"
           name="search"
           id="search"
