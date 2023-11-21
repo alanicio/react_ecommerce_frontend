@@ -37,7 +37,9 @@ const SelectedItemsTable = ({ choosedItems, removeItem, setQuantity }) => {
               />
             </td>
             <td>
-              <button onClick={() => removeItem(item)}>Remove</button>
+              <button className="delete" onClick={() => removeItem(item)}>
+                Remove
+              </button>
             </td>
           </tr>
         ))}

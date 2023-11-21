@@ -44,8 +44,21 @@ const OrderForm = () => {
     const items = [...choosedItems];
     setChoosedItems(items.filter(({ id }) => id !== item.id));
   };
+  const isValid = () => {
+    if (
+      country !== "" &&
+      city !== "" &&
+      neighborhood !== "" &&
+      street !== "" &&
+      exterior_number !== "" &&
+      choosedItems.length > 0
+    ) {
+      return true;
+    }
+    return false;
+  };
   return (
-    <div className="container">
+    <form className="container">
       <header>
         <h2>Orders Form</h2>
       </header>
@@ -121,18 +134,6 @@ const OrderForm = () => {
           </div>
           <div className="row pb-10">
             <div className="col-100">
-              <label htmlFor="country">City</label>
-              <input
-                type="text"
-                name="city"
-                id="city"
-                value={city}
-                onChange={orderChangeHandler}
-              />
-            </div>
-          </div>
-          <div className="row pb-10">
-            <div className="col-100">
               <label htmlFor="country">Interior number</label>
               <input
                 type="text"
@@ -145,7 +146,17 @@ const OrderForm = () => {
           </div>
         </div>
       </div>
-    </div>
+      <div className="row last-row">
+        <div className="col-60">
+          <h4>Total: $800000</h4>
+        </div>
+        <div className="col-40">
+          <button type="submit" className="primary" disabled={!isValid()}>
+            Save
+          </button>
+        </div>
+      </div>
+    </form>
   );
 };
 

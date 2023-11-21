@@ -54,6 +54,18 @@ button.primary {
 button.primary:hover {
   background-color: rgba(0, 199, 239, 1);
 }
+button.primary:disabled {
+  background-color: rgb(196, 202, 203);
+}
+
+button.delete {
+  background-color: rgb(153, 46, 44);
+  color: white;
+}
+
+button.delete:hover {
+  background-color: rgb(201, 102, 102);
+}
 
 .row {
   display: flex;
