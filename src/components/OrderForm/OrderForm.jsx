@@ -44,6 +44,12 @@ const OrderForm = () => {
     const items = [...choosedItems];
     setChoosedItems(items.filter(({ id }) => id !== item.id));
   };
+  const calculationOfTheTotal = () => {
+    return choosedItems.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0
+    );
+  };
   const isValid = () => {
     if (
       country !== "" &&
@@ -148,7 +154,7 @@ const OrderForm = () => {
       </div>
       <div className="row last-row">
         <div className="col-60">
-          <h4>Total: $800000</h4>
+          <h4>Total: ${calculationOfTheTotal()}</h4>
         </div>
         <div className="col-40">
           <button type="submit" className="primary" disabled={!isValid()}>
