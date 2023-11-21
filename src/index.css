@@ -24,6 +24,18 @@ body {
   );
 }
 
+label {
+  font-size: 14px;
+}
+
+input[type="text"] {
+  font-size: 14px;
+  box-sizing: border-box;
+  padding: 5px;
+  border-radius: 8px;
+  border: 1px solid black;
+}
+
 button {
   width: fit-content;
   font-size: 14px;
