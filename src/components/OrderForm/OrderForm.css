@@ -1,0 +1,6 @@
+.container {
+  background-color: red;
+  box-sizing: border-box;
+  height: 600px;
+  width: 800px;
+}
