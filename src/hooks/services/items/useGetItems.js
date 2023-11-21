@@ -1,11 +1,12 @@
 import useAxios from "../../useAxios";
 
-const useGetItems = () => {
+const useGetItems = (search) => {
   const { response, loading, error } = useAxios({
-    url: `items`,
+    url: `items?search=${search}`,
     method: "GET",
   });
-  return { response, loading, error };
+  const items = response ? response.data : [];
+  return { response, loading, error, items };
 };
 
 export default useGetItems;
