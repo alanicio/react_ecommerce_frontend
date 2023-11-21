@@ -2,6 +2,8 @@ import "./OrderForm.css";
 import FindItem from "../FindItem";
 import { useState } from "react";
 import SelectedItemsTable from "../SelectedItemsTable";
+import useCreateOrder from "../../hooks/services/orders/useCreateOrder";
+import { useEffect } from "react";
 
 const OrderForm = () => {
   const [choosedItems, setChoosedItems] = useState([]);
@@ -13,6 +15,9 @@ const OrderForm = () => {
     exterior_number: "",
     interior_number: "",
   });
+  const [submit, setSubmit] = useState(false);
+  const { response, error } = useCreateOrder(order, choosedItems, submit);
+  console.log({ response });
   const {
     country,
     city,
@@ -22,7 +27,7 @@ const OrderForm = () => {
     interior_number,
   } = order;
   const orderChangeHandler = (event) => {
-    setOrder({ [event.target.name]: event.target.value });
+    setOrder({ ...order, [event.target.name]: event.target.value });
   };
   const addItem = (item) => {
     setChoosedItems([...choosedItems, { ...item, quantity: 1 }]);
@@ -33,7 +38,7 @@ const OrderForm = () => {
         if (item.id === itemId) {
           return {
             ...item,
-            quantity,
+            quantity: Number(quantity),
           };
         }
         return item;
@@ -63,8 +68,18 @@ const OrderForm = () => {
     }
     return false;
   };
+  const onSubmitHandler = (event) => {
+    event.preventDefault();
+    setSubmit(true);
+  };
+  useEffect(() => {
+    if (response || error) {
+      setSubmit(false);
+    }
+  }, [response, error]);
+
   return (
-    <form className="container">
+    <form className="container" onSubmit={onSubmitHandler}>
       <header>
         <h2>Orders Form</h2>
       </header>
