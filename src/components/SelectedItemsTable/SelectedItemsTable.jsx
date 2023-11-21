@@ -17,7 +17,7 @@ const SelectedItemsTable = ({ choosedItems, removeItem, setQuantity }) => {
         <tr>
           <th>Item</th>
           <th>Price</th>
-          <th>Available Stock</th>
+          <th>Available</th>
           <th>Quantity</th>
         </tr>
         {choosedItems.map((item) => (

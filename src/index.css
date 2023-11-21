@@ -65,8 +65,32 @@ button.primary:hover {
   width: 100%;
 }
 
+.col-60 {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+}
+
+.col-40 {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+}
+
 .pb-15 {
   padding-bottom: 15px;
+}
+
+.pb-10 {
+  padding-bottom: 10px;
+}
+
+.pr-8 {
+  padding-right: 8px;
+}
+
+.pl-8 {
+  padding-left: 8px;
 }
 
 .with-border-bottom {
