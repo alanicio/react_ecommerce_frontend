@@ -6,11 +6,11 @@ import PropTypes from "prop-types";
 const Alert = ({ type, close }) => {
   const types = {
     success: {
-      message: "order created successfully",
+      message: "Order created successfully",
       icon: iconSuccess,
     },
     error: {
-      message: "sorry, we had difficulties, try again later",
+      message: "Sorry, we had difficulties, try again later",
       icon: iconError,
     },
   };
@@ -18,7 +18,7 @@ const Alert = ({ type, close }) => {
   return (
     <div className="alert-container">
       <img src={icon} alt={type} />
-      <p>{message}</p>
+      <h1>{message}</h1>
       <button type="button" className="primary" onClick={close}>
         Close
       </button>

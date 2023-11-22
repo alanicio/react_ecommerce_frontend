@@ -1,8 +1,8 @@
 import "./OrderForm.css";
 import { useState } from "react";
-import { useEffect } from "react";
 import OrderFormView from "./OrderFormView";
 import useCreateOrder from "src/hooks/services/orders/useCreateOrder";
+import Alert from "../Alert";
 
 const OrderForm = () => {
   const [choosedItems, setChoosedItems] = useState([]);
@@ -15,11 +15,7 @@ const OrderForm = () => {
     interior_number: "",
   });
   const [submit, setSubmit] = useState(false);
-  const { response, error, loading } = useCreateOrder(
-    order,
-    choosedItems,
-    submit
-  );
+  const { response, loading } = useCreateOrder(order, choosedItems, submit);
   const { country, city, neighborhood, street, exterior_number } = order;
   const orderChangeHandler = (event) => {
     setOrder({ ...order, [event.target.name]: event.target.value });
@@ -67,13 +63,13 @@ const OrderForm = () => {
     event.preventDefault();
     setSubmit(true);
   };
-  useEffect(() => {
-    if (response || error) {
-      setSubmit(false);
-    }
-  }, [response, error]);
   return loading ? (
     <h1>loading...</h1>
+  ) : submit ? (
+    <Alert
+      type={response ? "success" : "error"}
+      close={() => setSubmit(false)}
+    />
   ) : (
     <OrderFormView
       {...{
