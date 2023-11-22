@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./FindItem.css";
-import useGetItems from "../../hooks/services/items/useGetItems";
+import useGetItems from "src/hooks/services/items/useGetItems";
 import PropTypes from "prop-types";
 
 const FindItem = ({ addItem, choosedItems }) => {
