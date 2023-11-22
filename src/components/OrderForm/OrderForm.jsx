@@ -1,19 +1,21 @@
 import "./OrderForm.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import OrderFormView from "./OrderFormView";
 import useCreateOrder from "src/hooks/services/orders/useCreateOrder";
 import Alert from "../Alert";
 
+const intialStateOrder = {
+  country: "",
+  city: "",
+  neighborhood: "",
+  street: "",
+  exterior_number: "",
+  interior_number: "",
+};
+
 const OrderForm = () => {
   const [choosedItems, setChoosedItems] = useState([]);
-  const [order, setOrder] = useState({
-    country: "",
-    city: "",
-    neighborhood: "",
-    street: "",
-    exterior_number: "",
-    interior_number: "",
-  });
+  const [order, setOrder] = useState(intialStateOrder);
   const [submit, setSubmit] = useState(false);
   const { response, loading } = useCreateOrder(order, choosedItems, submit);
   const { country, city, neighborhood, street, exterior_number } = order;
@@ -63,6 +65,12 @@ const OrderForm = () => {
     event.preventDefault();
     setSubmit(true);
   };
+  useEffect(() => {
+    if (submit === false) {
+      setChoosedItems([]);
+      setOrder(intialStateOrder);
+    }
+  }, [submit]);
   return loading ? (
     <h1>loading...</h1>
   ) : submit ? (
