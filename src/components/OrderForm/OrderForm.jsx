@@ -15,8 +15,11 @@ const OrderForm = () => {
     interior_number: "",
   });
   const [submit, setSubmit] = useState(false);
-  const { response, error } = useCreateOrder(order, choosedItems, submit);
-  console.log({ response });
+  const { response, error, loading } = useCreateOrder(
+    order,
+    choosedItems,
+    submit
+  );
   const { country, city, neighborhood, street, exterior_number } = order;
   const orderChangeHandler = (event) => {
     setOrder({ ...order, [event.target.name]: event.target.value });
@@ -69,8 +72,9 @@ const OrderForm = () => {
       setSubmit(false);
     }
   }, [response, error]);
-
-  return (
+  return loading ? (
+    <h1>loading...</h1>
+  ) : (
     <OrderFormView
       {...{
         onSubmitHandler,

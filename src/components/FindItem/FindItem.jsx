@@ -55,7 +55,7 @@ const FindItem = ({ addItem, choosedItems }) => {
 };
 
 FindItem.propTypes = {
-  addItem: PropTypes.funct,
+  addItem: PropTypes.func,
   choosedItems: PropTypes.array,
 };
 
